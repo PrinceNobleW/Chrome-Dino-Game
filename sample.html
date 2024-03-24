@@ -1,0 +1,35 @@
+<html>
+    <style>
+        img {
+            position:absolute;
+        }
+        body {
+            margin-top:200px;
+        }
+        #track {
+            margin-top:70px;
+        }
+        #sm-cactus {
+            margin-top:20px;
+            margin-left:300px;
+        }
+        #lg-cactus {
+            margin-left:800px;
+        }
+    </style>
+    <body>
+        <img id="dino" src="assets/Dino/DinoRun1.png">
+        <div id="road">
+            <img id="track" src="assets/Other/Track.png">
+            <img id="sm-cactus" src="assets/Cactus/SmallCactus1.png">
+            <img id="lg-cactus" src="assets/Cactus/LargeCactus1.png">
+        </div>
+    </body>
+    <script>
+        var roadPosX = 0;
+        setInterval(function() {
+            roadPosX -= 10;
+            document.getElementById("road").style.setProperty("margin-left", roadPosX + "px");
+        }, 100);
+    </script>
+</html>
