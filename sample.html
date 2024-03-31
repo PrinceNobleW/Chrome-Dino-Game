@@ -16,6 +16,11 @@
         #lg-cactus {
             margin-left:800px;
         }
+        #jump-button {
+            margin-top: 150px;
+            font-size: 40px;
+            padding: 10px 40px;
+        }
     </style>
     <body>
         <img id="dino" src="assets/Dino/DinoRun1.png">
@@ -24,12 +29,50 @@
             <img id="sm-cactus" src="assets/Cactus/SmallCactus1.png">
             <img id="lg-cactus" src="assets/Cactus/LargeCactus1.png">
         </div>
+        <button id="jump-button" onclick="jump()">Jump</button>
     </body>
     <script>
         var roadPosX = 0;
-        setInterval(function() {
+        var dinoPosY = 0;
+        var isJump = false;
+        var triggerJump = false;
+        var isStart = false;
+
+        setInterval(updateGame, 25);
+
+        document.body.onkeyup = function(e) {
+            if (e.key == " " || e.code == "Space" || e.keyCode == 32) {
+                isStart = true;
+            }
+        }
+
+        function jump() {
+            if (!isJump) {
+                triggerJump = true;
+            }
+        }
+
+        function updateGame() {
+            if (!isStart) {
+                return;
+            }
+
+            if (dinoPosY > 0) {
+                dinoPosY -= 5;
+                if (dinoPosY <= 0) {
+                    dinoPosY = 0;
+                    isJump = false;
+                }
+            }
+            if (!isJump && triggerJump) {
+                dinoPosY = 160;
+                isJump = true;
+                triggerJump = false;
+            }
+
             roadPosX -= 10;
             document.getElementById("road").style.setProperty("margin-left", roadPosX + "px");
-        }, 100);
+            document.getElementById("dino").style.setProperty("margin-top", "-" + dinoPosY + "px");
+        }
     </script>
 </html>
